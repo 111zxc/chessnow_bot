@@ -12,7 +12,7 @@ def get_pgn_from_board(board: chess.Board) -> str:
     node = game
     for move in board.move_stack:
         node = node.add_main_variation(move)
-    pgn = game.__str__()
+    pgn = str(game)
     return pgn
 
 
