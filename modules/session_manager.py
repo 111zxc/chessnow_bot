@@ -1,13 +1,14 @@
 from modules.session import Session
 
+
 class SessionManager:
-    """ Used to manage sessions """
+    """Used to manage sessions"""
 
     def __init__(self) -> None:
         """
         Creates a new instance of a session manager, creates empty sessions list
         """
-        self.__sessions: list = list()
+        self._sessions: list = list()
 
     def add_session(self, session: Session) -> None:
         """
@@ -15,7 +16,7 @@ class SessionManager:
         :param session: object of a session
         :return: None
         """
-        self.__sessions.append(session)
+        self._sessions.append(session)
 
     def delete_session(self, session_id: str) -> int:
         """
@@ -25,9 +26,9 @@ class SessionManager:
         :rels
         turn: int
         """
-        for session in self.__sessions:
+        for session in self._sessions:
             if session.get_session_id() == session_id:
-                self.__sessions.remove(session)
+                self._sessions.remove(session)
                 return 0
         return 1
 
@@ -37,7 +38,7 @@ class SessionManager:
         :param session_id: query.inline_message_id, universal ID
         :return: Session object; 1 in case session doesn't exist
         """
-        for session in self.__sessions:
+        for session in self._sessions:
             if session.get_session_id() == session_id:
                 return session
         return 1

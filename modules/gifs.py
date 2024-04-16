@@ -1,13 +1,14 @@
 """ Работа с giphy """
 
+from typing import Optional
+
 import chess
 import requests
 from gifpgn import CreateGifFromPGN
-from typing import Optional
 
 
 def get_pgn_from_board(board: chess.Board) -> str:
-    """ Returns PGN notation from chess.Board object """
+    """Returns PGN notation from chess.Board object"""
     game = chess.pgn.Game()
     node = game
     for move in board.move_stack:
@@ -16,10 +17,9 @@ def get_pgn_from_board(board: chess.Board) -> str:
     return pgn
 
 
-def generate_gif(board) -> Optional[str]:
-    """ Generates and uploads to giphy chessmatch-gif, returns link """
+def generate_gif(board, api_key) -> Optional[str]:
+    """Generates and uploads to giphy chessmatch-gif, returns link"""
     upload_url = "https://upload.giphy.com/v1/gifs"
-    api_key = "lm2tU6LZ6qNaktKrdCtCTtC4WTUtC90u"
     gif = CreateGifFromPGN(get_pgn_from_board(board))
     gif.generate("output_gif.gif")
     params = {
@@ -27,9 +27,7 @@ def generate_gif(board) -> Optional[str]:
     }
 
     with open("output_gif.gif", "rb") as file:
-        files = {
-            "file": file
-        }
+        files = {"file": file}
 
         response = requests.post(upload_url, params=params, files=files)
 
