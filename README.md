@@ -7,9 +7,5 @@
 ## Использование
 1. `git clone https://github.com/111zxc/chessnow_bot`
 2. `cd chessnow_bot`
-3. `python -m venv env`
-4. `/env/Scripts/activate.ps1` or `\env\Scripts\activate`
-5. `pip install -r requirements.txt`
-6. `echo "TOKEN=<your_bot_token>" >> .env`
-7. `echo "API_KEY=<your_giphy_api_key>" >> .env`
-8. `python main.py`
+3. `docker build -t chessnow_bot .`
+4. `docker run -e TOKEN=<telegram_bot_token> API_KEY=<giphy_api_key>`
